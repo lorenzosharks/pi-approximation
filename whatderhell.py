@@ -6,41 +6,37 @@ i=0
 c=0
 b=0
 
+d=float(input("Size of the graph and circle (Larger radius = more accuracy): "))
+accuracy=int(input("Number of points generated (More points equals more accuracy): "))
+
 #set-up plot
-plt.xlim(-1, 1)
-plt.ylim(-1, 1)
+plt.xlim(-d, d)
+plt.ylim(-d, d)
 plt.axis('equal')
 
 #add circle
-circle1 = plt.Circle((0, 0), 1, fill=False, edgecolor="red")
+circle1 = plt.Circle((0, 0), d, fill=False, edgecolor="red")
 plt.gca().add_patch(circle1)
 
 #add square
-square_vertices = [(-1, -1), (-1, 1), (1, 1), (1, -1), (-1, -1)]
+square_vertices = [(-d, -d), (-d, d), (d, d), (d, -d), (-d, -d)]
 x, y = zip(*square_vertices)
 plt.plot(x, y, 'b-')
 
-#generate a random point
-x = random.random() * 2 - 1
-y = random.random() * 2 - 1
-
 #plot the random point
-for i in range(10000):
-    x = random.random() * 2 - 1
-    y = random.random() * 2 - 1
-    if (x**2)+(y**2)<1:
+for i in range(accuracy):
+    x = random.random() * 2 * d - d
+    y = random.random() * 2 * d - d
+    if (x**2)+(y**2)<(d**2):
         plt.plot(x, y, 'bo')
         c=c+1
-    elif (x**2)+(y**2)>1:
+    elif (x**2)+(y**2)>(d**2):
         plt.plot(x, y, 'ro')
         b=b+1
-    elif (x**2)+(y**2)>1:
-        plt.plot(x, y, 'go')
-        b=b+1
-a=c/(b+c)
+a=(4*c)/(b+c)
 
 #add text
-text1 = plt.text(-1.1, 1.2, "Pi approximation: " + str(a))
+text1 = plt.text(-1.1, d+0.2, "Pi approximation: " + str(a))
 
 #display plot
 plt.show()
