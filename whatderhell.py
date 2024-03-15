@@ -37,7 +37,7 @@ for i in range(10000):
     elif (x**2)+(y**2)>1:
         plt.plot(x, y, 'go')
         b=b+1
-a=c/b
+a=c/(b+c)
 
 #add text
 text1 = plt.text(-1.1, 1.2, "Pi approximation: " + str(a))
